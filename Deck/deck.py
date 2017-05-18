@@ -25,6 +25,18 @@ class Deck:
         except IndexError:
             raise IndexError('empty deck')
 
+    def peak_last(self):
+        try:
+            return self.deck[-1]
+        except IndexError:
+            raise IndexError('empty deck')
+
+    def peak_first(self):
+        try:
+            return self.deck[0]
+        except IndexError:
+            raise IndexError('empty deck')
+
     def __str__(self):
         return str(self.deck)
 
@@ -44,3 +56,5 @@ print d
 for x in d:
     print x
 print d
+a = Deck()
+a.peak_last()
