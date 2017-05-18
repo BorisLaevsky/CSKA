@@ -8,7 +8,7 @@ class Stack:
 
     def pop(self):
         deleted_element = self.stack[-1]
-        self.stack.remove(self.stack[-1])
+        self.stack.remove(deleted_element)
         return deleted_element
 
     def peak(self):
