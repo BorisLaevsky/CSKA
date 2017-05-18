@@ -23,14 +23,15 @@ class Stack:
     def next(self):
         if len(self.stack) == 0:
             raise StopIteration
-        self.stack.pop()
+        return self.stack.pop()
 
 s = Stack()
-s.Print()
 s.push(1)
 s.push(2)
 s.push(3)
 s.Print()
+print s.next()
+s.Print()
 for element in s:
     print element
-s.Print()
+#s.Print()
