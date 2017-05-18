@@ -14,7 +14,6 @@ class Stack:
     def peak(self):
         return self.stack[-1]
 
-    def Print(self):
         print self.stack
 
     def __iter__(self):
@@ -25,13 +24,15 @@ class Stack:
             raise StopIteration
         return self.stack.pop()
 
+    def __str__(self):
+        return str(self.stack)
+
 s = Stack()
+print s
 s.push(1)
 s.push(2)
 s.push(3)
-s.Print()
+print s
 print s.next()
-s.Print()
 for element in s:
     print element
-#s.Print()
