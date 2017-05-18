@@ -14,8 +14,6 @@ class Stack:
     def peak(self):
         return self.stack[-1]
 
-        print self.stack
-
     def __iter__(self):
         return self
 
