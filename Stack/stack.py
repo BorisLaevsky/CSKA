@@ -7,9 +7,13 @@ class Stack:
         self.stack.append(element)
 
     def pop(self):
-        deleted_element = self.stack[-1]
-        self.stack = self.stack[:-1]
-        return deleted_element
+        try:
+            deleted_element = self.stack[-1]
+            self.stack = self.stack[:-1]
+            return deleted_element
+        except IndexError:
+            print "ay lmao popin empty stack"
+
 
     def peak(self):
         return self.stack[-1]
@@ -26,10 +30,6 @@ class Stack:
         return str(self.stack)
 
 s = Stack()
-s.push(5)
-s.push(2)
-s.push(3)
-s.push(1)
-s.push(2)
+
 print s.pop()
-print s
+

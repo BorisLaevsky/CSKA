@@ -7,9 +7,12 @@ class Queue:
         self.queue.append(element)
 
     def pop(self):
-        first_element = self.queue[0]
-        self.queue = self.queue[1:]
-        return first_element
+        try:
+            first_element = self.queue[0]
+            self.queue = self.queue[1:]
+            return first_element
+        except IndexError:
+            print "popin empty queue, Jimbo"
 
     def peak(self):
         return self.queue[0]
@@ -20,19 +23,10 @@ class Queue:
     def next(self):
         if len(self.queue) == 0:
            raise StopIteration
-        first = self.queue[0]
-        self.queue = self.queue[1:]
-        return first
+        return self.pop()
 
     def __str__(self):
         return str(self.queue)
 
 q = Queue()
-q.push('a')
-q.push('b')
-q.push('c')
-q.push('d')
-print q
-for x in q:
-    print x
-print q
+q.pop()
