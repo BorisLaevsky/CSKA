@@ -12,7 +12,7 @@ class Queue:
             self.queue = self.queue[1:]
             return first_element
         except IndexError:
-            raise NameError("popin empty queue, Jimbo")
+            raise IndexError("popin empty queue, Jimbo")
 
     def peak(self):
         return self.queue[0]

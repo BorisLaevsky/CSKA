@@ -12,8 +12,7 @@ class Stack:
             self.stack = self.stack[:-1]
             return deleted_element
         except IndexError:
-            raise NameError("ay lmao popin empty stack")
-
+            raise IndexError("ay lmao popin empty stack")
 
     def peak(self):
         return self.stack[-1]
