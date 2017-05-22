@@ -14,15 +14,19 @@ class Node:
     def Previous_element(self):
         return self.previous_element
 
-    def add_next_element(self, element):
+    def set_next_element(self, element):
         self.next_element = element
-        element.previous_element = self
-        return element
+        element.previous_element= self
+
+    def set_previous_element(self, element):
+        self.previous_element = element
+        element.next_element = self
 
     def __str__(self):
         return str(self.value)
 
 x = Node(None, 1, None)
-x.add_next_element(Node(None, 2, None)).add_next_element(Node(None, 3, None))
-print x.Next_element().Next_element().Previous_element()
-
+y = Node(None, 2, None)
+x.set_next_element(y)
+x.set_previous_element(Node(None, -1, None))
+print x.Next_element().Previous_element().Previous_element()
