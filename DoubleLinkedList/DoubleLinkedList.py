@@ -23,6 +23,6 @@ class Node:
     def __str__(self):
         return str(self.__value)
 
-x = Node(1,)
+x = Node(1)
 y = Node(3, None, x)
 print x.previous_element()
