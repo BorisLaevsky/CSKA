@@ -5,15 +5,7 @@ class Child:
         self.__key = key
         self.__left_child = left_child
         self.__right_child = right_child
-        if isinstance(parent, Child):
-           if self.__key < parent.__key:
-              parent.__left_child = self
-           else:
-              parent.__right_child = self
-        if isinstance(left_child, Child):
-           left_child.__parent = self
-        if isinstance(right_child, Child):
-           right_child.__parent = self
+
 
     def __str__(self):
         return str(self.__value)
@@ -33,12 +25,19 @@ class Child:
     def get_key(self):
         return self.__key
 
-    def parent(self):
-        return self.__parent
+    def insert(self, value, key):
+        if self.__key <= key:
+           if isinstance(self.__right_child, Child):
+              self.__right_child.insert(value, key)
+           else:
+              self.__right_child = Child(value, key, self)
+        else:
+           if isinstance(self.__left_child, Child):
+              self.__left_child.insert(value, key)
+           else:
+              self.__left_child = Child(value, key, self)
 
 top = Child(1,1)
-left = Child(2, 0, top)
-right = Child(3, 2, top)
-print top.bottom_left()
-print top.bottom_right()
-
+top.insert(2,2)
+top.insert(3,3)
+print top.bottom_right().bottom_right().parent()
