@@ -46,19 +46,15 @@ class Child:
             return self
 
     def remove(self, key):
-        if self.find(key).__right_child == None and self.find(key).__left_child == None:
-           self.find(key) = None
-        elif isinstance(self.find(key).__right_child, Child) and self.find(key).__left_child == None:
-           replacement = self.find(key).__right_child
-           self.find(key) = None
-           self.insert(replacement)
-        elif isinstance(self.find(key).__left_child, Child) and self.find(key).__right_child == None:
-           replacement = self.find(key).__left_child
-           self.find(key) = None
-           self.insert(replacement)
-        else:
-           self.find(key)
-
+        removed_element = self.find(key)
+        self.find(key).__key = None
+        if isinstance(removed_element.__left_child, Child) and removed_element.__right_child == False:
+           self.insert(removed_element.__left_child)
+        if isinstance(removed_element.__right_child, Child) and removed_element.__left_child == False:
+           self.insert(removed_element.__right_child)
+        if isinstance(removed_element.__left_child, Child) and isinstance(removed_element.__right_child):
+           self.insert(removed_element.__left_child)
+           self.insert(removed_element.__right_child)
 
 
 
@@ -66,3 +62,5 @@ top = Child(1,1)
 top.insert(2,2)
 top.insert(3,3)
 print top.bottom_right().bottom_right().value()
+top.remove(2)
+print top.bottom_right()
