@@ -61,15 +61,15 @@ class Child:
               self.__left_child = child
               child.__parent = self
 
-    def __normal_remove(self, key):
+    def __recursive_remove(self, key):
         left_child_replacement = None
         right_child_replacement = None
         if isinstance(self.__left_child, Child) and key < self.__key:
            if self.__left_child.__key != key:
-              self.__left_child.__normal_remove(key)
+              self.__left_child.__recursive_remove(key)
         elif isinstance(self.__right_child, Child) and key > self.__key:
            if self.__right_child.__key != key:
-              self.__right_child.__normal_remove(key)
+              self.__right_child.__recursive_remove(key)
         if isinstance(self.__right_child, Child) and  self.__right_child.__key == key:
            if isinstance(self.__right_child.__right_child, Child):
               right_child_replacement = self.__right_child.__right_child
@@ -90,30 +90,37 @@ class Child:
     def __corner_case(self):
         if isinstance(self.__left_child, Child):
            right_child = self.__right_child
+           left_grandson = self.__left_child.__left_child
+           right_grandson = self.__left_child.__right_child
            self.__right_child = None
            self.__key = self.__left_child.__key
            self.__value = self.__left_child.__value
-           self.insert_child(self.__left_child.__left_child)
-           self.insert_child(self.__left_child.__right_child)
+           self.__left_child = None
+           self.insert_child(left_grandson)
+           self.insert_child(right_grandson)
            self.insert_child(right_child)
         elif isinstance(self.__right_child, Child):
            left_child = self.__left_child
+           left_grandson = self.__right_child.__left_child
+           right_grandson = self.__right_child.__right_child
            self.__right_child = None
            self.__key = self.__right_child.__key
            self.__value = self.__right_child.__value
-           self.insert_child(self.__right_child.__left_child)
-           self.insert_child(self.__right_child.__right_child)
+           self.__right_child = None
+           self.insert_child(left_grandson)
+           self.insert_child(right_grandson)
            self.insert_child(left_child)
+
     def remove(self, key_to_remove):
         if self.__key == key_to_remove:
            self.__corner_case()
         else:
-           self.__normal_remove(key_to_remove)
+           self.__recursive_remove(key_to_remove)
 
 top = Child(1,5)
 top.insert(2,4)
 top.insert(3,9)
 top.insert(4,10)
 top.insert(5,3)
-top.remove(5)
-print top
+top.remove(9)
+print top.bottom_right()
