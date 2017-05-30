@@ -61,15 +61,15 @@ class Child:
               self.__left_child = child
               child.__parent = self
 
-    def __recursive_remove(self, key):
+    def __remove_child(self, key):
         left_child_replacement = None
         right_child_replacement = None
         if isinstance(self.__left_child, Child) and key < self.__key:
            if self.__left_child.__key != key:
-              self.__left_child.__recursive_remove(key)
+              self.__left_child.__remove_child(key)
         elif isinstance(self.__right_child, Child) and key > self.__key:
            if self.__right_child.__key != key:
-              self.__right_child.__recursive_remove(key)
+              self.__right_child.__remove_child(key)
         if isinstance(self.__right_child, Child) and  self.__right_child.__key == key:
            if isinstance(self.__right_child.__right_child, Child):
               right_child_replacement = self.__right_child.__right_child
@@ -87,7 +87,8 @@ class Child:
            self.insert_child(left_child_replacement)
            self.insert_child(right_child_replacement)
 
-    def __corner_case(self):
+    def __remove_root(self):
+        #corner_case
         if isinstance(self.__left_child, Child):
            right_child = self.__right_child
            left_grandson = self.__left_child.__left_child
@@ -113,9 +114,9 @@ class Child:
 
     def remove(self, key_to_remove):
         if self.__key == key_to_remove:
-           self.__corner_case()
+           self.__remove_root()
         else:
-           self.__recursive_remove(key_to_remove)
+           self.__remove_child(key_to_remove)
 
 top = Child(1,5)
 top.insert(2,4)
