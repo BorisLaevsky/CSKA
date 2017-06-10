@@ -37,8 +37,19 @@ class Child:
             for child in self.__list_of_children:
                 found_value = child.depth_first_search(value_to_find)
                 if isinstance(found_value, Child) and found_value.__value == value_to_find:
-                    return found_value.depth_first_search(value_to_find)
+                    return found_value
 
+    def breadth_first_search(self, value_to_find):
+        if self.__value == value_to_find:
+            return self
+        elif self.__list_of_children:
+            for child in self.__list_of_children:
+                if child.__value == value_to_find:
+                    return child
+            for child in self.__list_of_children:
+                found_value = child.breadth_first_search(value_to_find)
+                if isinstance(found_value, Child) and found_value.__value == value_to_find:
+                    return found_value
 
 root = Child(1,3)
 root.insert(2,3)
@@ -48,4 +59,4 @@ root.insert(5,3)
 root.insert(6,3)
 root.insert(7,3)
 root.insert(8,3)
-print root.depth_first_search(6)
+print root.breadth_first_search(8)
