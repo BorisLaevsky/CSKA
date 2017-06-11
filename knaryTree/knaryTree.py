@@ -40,7 +40,7 @@ class Child:
                     return found_value
 
     def breadth_first_search(self, value_to_find):
-        explored = []
+        explored = Child(None, None, None, [])
         if self.__value == value_to_find:
             return self
         elif self.__list_of_children:
@@ -48,12 +48,8 @@ class Child:
                 if child.__value == value_to_find:
                     return child
                 else:
-                    explored += child.__list_of_children
-            for child in explored:
-                found_child = child.breadth_first_search(value_to_find)
-                if isinstance(found_child, Child) and found_child.__value == value_to_find:
-                    return found_child
-
+                    explored.__list_of_children += child.__list_of_children
+            return explored.breadth_first_search(value_to_find)
 
 root = Child(1,3)
 root.insert(2,3)
