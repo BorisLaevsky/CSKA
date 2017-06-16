@@ -21,14 +21,22 @@ class Child:
             return "Child does not exist"
 
     def insert(self, value_to_insert, number_of_children):
+        next_level = []
         if len(self.__list_of_children) < self.__number_of_children:
             self.__list_of_children.append(Child(value_to_insert, number_of_children, None, []))
             self.__list_of_children[-1].__parent = self
+            return True
         else:
             for child in self.__list_of_children:
                 if len(child.__list_of_children) < child.__number_of_children:
-                    child.insert(value_to_insert, number_of_children)
-                    break
+                    return child.insert(value_to_insert, number_of_children)
+                else:
+                    next_level.append(child)
+            for child in next_level:
+                insert_success = child.insert(value_to_insert, number_of_children)
+                if insert_success:
+                    return insert_success
+
 
     def depth_first_search(self, value_to_find):
         if self.__value == value_to_find:
@@ -59,4 +67,12 @@ root.insert(5,3)
 root.insert(6,3)
 root.insert(7,3)
 root.insert(8,3)
-print root.breadth_first_search(7)
+root.insert(9,3)
+root.insert(10,3)
+root.insert(11,3)
+root.insert(12,3)
+root.insert(13,3)
+root.insert(14,3)
+root.insert(15,3)
+print root.breadth_first_search(15)
+print root.get_kth_child(1).get_kth_child(1).get_kth_child(2)
