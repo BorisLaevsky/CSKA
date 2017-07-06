@@ -4,7 +4,7 @@ def bubblesort(input_list):
         index = 0
         while index < upper_bound-1:
             if input_list[index] > input_list[index+1]:
-                input_list[index],input_list[index+1] = input_list[index+1],input_list[index]
+                input_list[index], input_list[index+1] = input_list[index+1], input_list[index]
             index += 1
         upper_bound -= 1
 
