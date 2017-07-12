@@ -1,4 +1,4 @@
-def particion(input_list, left = 0, right = None):
+def partition(input_list, left = 0, right = None):
     if right == None:
         right = len(input_list) - 1
     pivot = input_list[right]
@@ -18,15 +18,13 @@ def particion(input_list, left = 0, right = None):
 def qsort(input_list, left = 0, right = None):
     if right == None:
         right = len(input_list) - 1
-    pivot = particion(input_list, left, right)
+    pivot = partition(input_list, left, right)
     if left < right:
         qsort(input_list, left, pivot)
         qsort(input_list, pivot+1, len(input_list) - 1)
 
 
-
-x = [1,2,3,7,0,1,2,5,7]
+x = [1,1,1,1,1,1,2,3,4,5,1,5]
 print x
 qsort(x)
 print x
-
