@@ -12,10 +12,10 @@ def merge(first_list, second_list):
             output.append(first_list.pop(0))
         else:
             output.append(second_list.pop(0))
-    if not first_list:
-        output += second_list
-    else:
+    if first_list:
         output += first_list
+    else:
+        output += second_list
     return output
 
 def mergesort(input_list):
